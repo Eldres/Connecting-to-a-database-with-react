@@ -8,7 +8,7 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const starWarsAPI = "https://swapi.dev/api/films/";
+  // const starWarsAPI = "https://swapi.dev/api/films/";
   const firebaseBaseAPI =
     "https://react-http-request-2384c-default-rtdb.firebaseio.com";
   const firebaseMoviesAPI = `${firebaseBaseAPI}/movies.json`;
