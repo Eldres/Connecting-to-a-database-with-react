@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import MoviesList from "./components/MoviesList";
 import "./App.css";
@@ -8,7 +8,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleFetchMovies = async () => {
+  const handleFetchMovies = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
@@ -39,23 +39,27 @@ function App() {
 
     /* commented out below code in favor of using async/await
     fetch("https://swapi.dev/api/films/")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        const transformedMovies = data.results.map((movieData) => {
-          return {
-            id: movieData.episode_id,
-            title: movieData.title,
-            openingText: movieData.opening_crawl,
-            releaseDate: movieData.release_date,
-          };
-        });
-
-        setMovies(transformedMovies);
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      const transformedMovies = data.results.map((movieData) => {
+        return {
+          id: movieData.episode_id,
+          title: movieData.title,
+          openingText: movieData.opening_crawl,
+          releaseDate: movieData.release_date,
+        };
       });
+      
+      setMovies(transformedMovies);
+    });
     */
-  };
+  }, []);
+
+  useEffect(() => {
+    handleFetchMovies();
+  }, [handleFetchMovies]);
 
   let content = <p>Found no movies.</p>;
 
